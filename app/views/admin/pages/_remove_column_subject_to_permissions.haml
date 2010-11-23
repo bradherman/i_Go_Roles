@@ -1,0 +1,2 @@
+- if current_user.publisher? or current_user.id == Page.find(page).created_by_id # OR current_user.admin? OR current_user.editor?
+  %td.remove= link_to ' Remove', remove_admin_page_url(page)
