@@ -1,2 +1,8 @@
-- if current_user.publisher? or current_user.id == Page.find(page).created_by_id # OR current_user.admin? OR current_user.editor?
+- if current_user.admin?
+  %td.remove= link_to ' Remove', remove_admin_page_url(page)
+- elsif current_user.publisher?
+  %td.remove= link_to ' Remove', remove_admin_page_url(page)
+- elsif (current_user.editor? and Page.find(page).status_id == 1)
+  %td.remove= link_to ' Remove', remove_admin_page_url(page)
+- elsif (current_user.id == Page.find(page).created_by_id and Page.find(page).status_id == 1)
   %td.remove= link_to ' Remove', remove_admin_page_url(page)
