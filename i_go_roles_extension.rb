@@ -14,12 +14,14 @@ class IGoRolesExtension < Radiant::Extension
 
     ######## Give tag acces to admin and publisher ########
     #######################################################
-    #Admin::TagsController.class_eval {
-    #  only_allow_access_to(:index, :show, :cloud,
-    #    :when => [:admin, :publisher], # figure how to add multiple
-    #    :denied_url => {:controller => 'welcome', :action => 'index'},
-    #    :denied_message => "You do not have access to tags.")
-    #}
+    if Admin::TagsController  # maybe bad syntax for this?
+      Admin::TagsController.class_eval {
+        only_allow_access_to(:index, :show, :cloud,
+          :when => [:admin, :publisher], # figure how to add multiple
+          :denied_url => {:controller => 'welcome', :action => 'index'},
+          :denied_message => "You do not have access to tags.")
+      }
+    end
     
     
     
