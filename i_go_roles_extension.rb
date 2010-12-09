@@ -10,29 +10,6 @@ class IGoRolesExtension < Radiant::Extension
   
   def activate
     
-    ## Roles should be added in migrations
-    
-    if !Role.find_by_role_name('Publisher')
-    Role.create(
-      :role_name => 'Publisher',
-      :description => 'Publishers add, edit, delete, publish, and unpublish anything.', 
-      :allow_empty => true)
-    end
-    
-    if !Role.find_by_role_name('Writer')
-    Role.create(
-      :role_name => 'Writer', 
-      :description => 'Writers may create content and edit their own.', 
-      :allow_empty => true)
-    end
-    
-    if !Role.find_by_role_name('Editor')
-    Role.create(
-      :role_name => 'Editor', 
-      :description => 'Editors may create new content, edit all content, and delete unpublished.', 
-      :allow_empty => true)
-    end
-
     ############# Access List #############
 
     ######## Give tag acces to admin and publisher ########
