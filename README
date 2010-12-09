@@ -1,3 +1,9 @@
 = I Go Roles
 
-Description goes here
+Radiant CMS extension to create a set of roles and pull some features from non-authorized users.
+
+So far:
+
+Creates Publisher, Editor, and Writer.
+
+Editor and Writer are restricted from accessing Tags.  Publisher, Editor, and Writer are restricted from Snippets, User roles, etc.
