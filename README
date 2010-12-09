@@ -7,3 +7,11 @@ So far:
 Creates Publisher, Editor, and Writer.
 
 Editor and Writer are restricted from accessing Tags.  Publisher, Editor, and Writer are restricted from Snippets, User roles, etc.
+
+Writer may create pages and edit their own content AS LONG AS it has NOT been published.  Once their content is published, they may not edit it, delete it, or modify it.
+
+Editors may create pages and edit anyones content AS LONG AS it has NOT been published.
+
+Publishers may create and edit anyones content, as well as publish and delete content whether it has been published or not.  Publishers may also add and edit Tags.
+
+An admin can do everything, as well as edit User Roles.
