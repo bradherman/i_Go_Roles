@@ -1,0 +1,105 @@
+- if current_user.publisher? or current_user.admin?
+  .set
+    %p
+      %label{:for => "page_layout_id"} Layout
+      %select#page_layout_id{:name => "page[layout_id]"}
+        - if @page.layout_id == nil
+          %option{:value => "", :selected => "selected"} &lt;inherit&gt;
+        - else 
+          %option{:value => ""} &lt;inherit&gt;
+          
+        - if @page.layout_id == 1
+          %option{:value => "1", :selected => "selected"} Normal
+        - else
+          %option{:value => "1"} Normal
+          
+        - if @page.layout_id == 2
+          %option{:value => "2", :selected => "selected"} Stylesheet
+        - else
+          %option{:value => "2"} Stylesheet
+        
+        - if @page.layout_id == 3
+          %option{:value => "3", :selected => "selected"} XML Feed
+        - else
+          %option{:value => "3"} XML Feed
+    %p
+      %label{:for => "page_class_name"} Page Type
+      %select#page_class_name{:name => "page[class_name]"}
+        - if @page.class_name == "Page"
+          %option{:value => "Page", :selected => "selected"} &lt;normal&gt;
+        - else
+          %option{:value => "Page"} &lt;normal&gt;
+          
+        - if @page.class_name == "ArchivePage"
+          %option{:value => "ArchivePage", :selected => "selected"} Archive
+        - else
+          %option{:value => "ArchivePage"} Archive
+          
+        - if @page.class_name == "ArchiveDayIndexPage"
+          %option{:value =>"ArchiveDayIndexPage", :selected => "selected"} Archive Day Index
+        - else
+          %option{:value =>"ArchiveDayIndexPage"} Archive Day Index
+          
+        - if @page.class_name == "ArchiveMonthIndexPage"
+          %option{:value => "ArchiveMonthIndexPage", :selected => "selected"} Archive Month Index
+        - else
+          %option{:value => "ArchiveMonthIndexPage"} Archive Month Index
+        
+        - if @page.class_name == "ArchiveYearIndexPage"
+          %option{:value => "ArchiveYearIndexPage", :selected => "selected"} Archive Year Index
+        - else
+          %option{:value => "ArchiveYearIndexPage"} Archive Year Index
+        
+        - if @page.class_name == "EnvDumpPage"
+          %option{:value => "EnvDumpPage", :selected => "selected"} Env Dump
+        - else
+          %option{:value => "EnvDumpPage"} Env Dump
+        
+        - if @page.class_name == "FileNotFoundPage"
+          %option{:value => "FileNotFoundPage", :selected => "selected"} File Not Found
+        - else
+          %option{:value => "FileNotFoundPage"} File Not Found
+    %p 
+      %label{:for => "page_status_id"} Status
+      %select#page_status_id{:name => "page[status_id]"}
+        - if @page.status_id == 1
+          %option{:value => "1", :selected => "selected"} Draft
+        - else
+          %option{:value => "1"} Draft
+        
+        - if @page.status_id == 50
+          %option{:value => "50", :selected => "selected"} Reviewed
+        - else
+          %option{:value => "50"} Reviewed
+        
+        - if @page.status_id == 100
+          %option{:value => "100", :selected => "selected"} Published
+        - else
+          %option{:value => "100"} Published
+        
+        - if @page.status_id == 101
+          %option{:value => "101", :selected => "selected"} Hidden
+        -else
+          %option{:value => "101"} Hidden
+    %p#published_at
+      %label{:for => "page_published_at"} Published On
+      %input.date#page_published_at{:name => "page[published_at]", :size => "30", :type => "text", :value => "December 23, 2008"}
+      
+/- render_region :locals => {:f => fields} do |layout|
+/    - layout.edit_layout do
+/      %p
+/        = fields.label :layout_id, t('layout')
+/        = fields.select :layout_id, [[t('select.inherit') , '']] + Layout.find(:all).map { |s| [s.name, s.id] }
+/    - layout.edit_type do
+/      %p
+/        = fields.label :class_name, t('page_type')
+/        = fields.select :class_name, [[t('select.normal'), '']] + Page.descendants.map { |p| [p.display_name, p.name] }.sort_by { |p| p.first }
+/    - layout.edit_status do
+/      %p
+/        = fields.label :status_id, t('status')
+/        = fields.select :status_id, status_to_display
+/    - layout.edit_published_at do
+/      %p#published_at{:class => (@page.published? ? nil : 'hidden')}
+/        = fields.label :published_at, t('published_on')
+/        = fields.text_field :published_at, :class=> "date", :value => (@page.published_at? ? I18n.localize(@page.published_at.to_date, :format =>:long) : nil)
+/    = render_region :layout_row, :locals => {:f => fields}

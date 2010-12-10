@@ -35,14 +35,12 @@ class IGoRolesExtension < Radiant::Extension
     # Remove delete link from published stories
     ############################################
     
-    ############# To Do for Publisher #############
-    # Give tag access
-    ###############################################
-    
     admin.page.index[:node].delete('remove_column')
     admin.page.index.add :node, 'remove_column_subject_to_permissions', :after => "add_child_column"
     
     # remove publish feature 
-    # admin.page.edit[:partial].delete('page_status_id')
+    admin.page.edit[:form].delete('edit_layout_and_type')
+    admin.page.edit.add :form, 'test', :after => 'edit_page_parts'
+    #admin.page.edit.add :form, 'edit_layout_and_type_subject_to_permissions', :after => 'edit_page_parts'
   end
 end
