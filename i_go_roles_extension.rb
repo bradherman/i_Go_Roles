@@ -14,17 +14,17 @@ class IGoRolesExtension < Radiant::Extension
 
     ######## Give tag acces to admin and publisher ########
     #######################################################
-    if Admin::TagsController  # maybe bad syntax for this?
+    begin
       Admin::TagsController.class_eval {
         only_allow_access_to(:index, :show, :cloud,
           :when => [:admin, :publisher], # figure how to add multiple
           :denied_url => {:controller => 'welcome', :action => 'index'},
           :denied_message => "You do not have access to tags.")
       }
+    rescue
+      puts "iGoRoles: Taggable Not Installed"
     end
-    
-    
-    
+   
     ############# To Do for Writer #############
     # Remove Delete Link next to Pages not created by this user
     # Remove status update field
